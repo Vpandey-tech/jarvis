@@ -1,0 +1,11 @@
+playsound==1.2.2
+opencv-python
+pvpoorcupine==1.9.5
+pyttsx3
+SpeechRecognition
+Eel
+pywhatkit
+pyautogui
+huggingface_hub
+opencv-contrib-python
+python-dotenv
