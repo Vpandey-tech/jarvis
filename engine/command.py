@@ -176,19 +176,40 @@ def allCommands(message=1):
             print(weather_report)
             speak(weather_report)
 
+        # elif "write email" in query.lower():
+        #     """Generate email content based on the query and send it to the specified recipient."""
+        #     recipient_email = extract_email_from_query(query)
+        #     if recipient_email:
+        #         email_content = generate_email_content(query)
+        #         subject = "Generated Email from Chatbot"
+        #         status =  send_email(subject, email_content, recipient_email)
+        #         eel.DisplayMessage(status)
+        #         return status
+        #     else:
+        #         error_message = "Recipient email is missing or invalid."
+        #         eel.DisplayMessage(error_message)
+        #         return error_message
+
         elif "write email" in query.lower():
             """Generate email content based on the query and send it to the specified recipient."""
             recipient_email = extract_email_from_query(query)
+            
             if recipient_email:
                 email_content = generate_email_content(query)
                 subject = "Generated Email from Chatbot"
-                status =  send_email(subject, email_content, recipient_email)
-                eel.DisplayMessage(status)
+                status = send_email(subject, email_content, recipient_email)
+                
+                if status == "Email sent successfully!":
+                    eel.ShowHood()  # Call your special function to show the hood
+                else:
+                    eel.DisplayMessage(status)  # Show error if email sending fails
+                
                 return status
             else:
                 error_message = "Recipient email is missing or invalid."
                 eel.DisplayMessage(error_message)
                 return error_message
+
 
 
 
