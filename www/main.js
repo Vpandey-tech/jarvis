@@ -121,6 +121,15 @@ $(document).ready(function () {
 
 });
 
+document.addEventListener("mousemove", (e) => {
+    let trail = document.createElement("div");
+    trail.className = "cursor-trail";
+    document.body.appendChild(trail);
+    trail.style.left = `${e.clientX}px`;
+    trail.style.top = `${e.clientY}px`;
+    setTimeout(() => trail.remove(), 300);
+});
+
 // document.getElementById("send-chat-btn").addEventListener("click", function() {
 //     const userInput = document.getElementById("chat-input").value;
 
@@ -168,5 +177,4 @@ document.getElementById("send-chat-btn").addEventListener("click", function() {
         });
     }
 });
-
 

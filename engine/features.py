@@ -22,6 +22,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 from engine.speakk import speak
+import pypdf
+from transformers import pipeline
 
 # Database connection
 con = sqlite3.connect("jarvis.db")
@@ -287,6 +289,7 @@ def extract_email_from_query(query):
 
     # Return None if no email is found
     return None
+
 
 
 

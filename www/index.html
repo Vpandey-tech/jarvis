@@ -273,28 +273,23 @@
             </div>
         </section>
 
-        <section id="Oval" class="mb-4" hidden>
 
+        <div id="particles-js"></div>
+
+        <section id="Oval" class="mb-4">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
-
-                        <canvas id="canvasOne" width="700" height="420" style="position: absolute;"></canvas>
-
-                        <div id="JarvisHood">
-
-                            <div class="square">
-                                <span class="circle"></span>
-                                <span class="circle"></span>
-                                <span class="circle"></span>
-                            </div>
-
+                        <div class="hologram-container">
+                            <div class="core"></div>
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                            <div class="ring ring-4"></div>
                         </div>
-
                     </div>
-                    <h5 class="text-light text text-center"> Ask me anything </h5>
-
+                    <h5 class="text-light text text-center">Ask me anything</h5>
                     <div class="col-md-12 mt-4 pt-4">
                         <div class="text-center">
                             <div id="TextInput" class="d-flex">
@@ -345,7 +340,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div id="chat-canvas-body" class="offcanvas-body">
-
+s
             <!-- Chatting code here -->
             <div id="chat-canvas-body" class="offcanvas-body">
                 <!-- Chat log for displaying messages -->
@@ -360,6 +355,27 @@
 
                 </div> -->
             </div>
+
+
+
+            <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    particlesJS("particles-js", {
+                        particles: {
+                            number: { value: 250, density: { enable: true, value_area: 800 }},
+                            color: { value: "#2962FF" },
+                            shape: { type: "circle" },
+                            opacity: { value: 0.5, random: true },
+                            size: { value: 1.8, random: true },
+                            line_linked: { enable: false },
+                            move: { enable: true, speed: 0.3, direction: "none" }
+                        },
+                        retina_detect: true
+                    });
+                });
+            </script>
+
 
               
             
@@ -390,6 +406,7 @@
             <script type="text/javascript" src="main.js"></script>
             <script type="text/javascript" src="controller.js"></script>
             <script type="text/javascript" src="/eel.js"></script>
+            
 </body>
 
 </html>

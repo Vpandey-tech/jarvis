@@ -1,81 +1,95 @@
-
-body{
+body {
   background-color: black;
   overflow-y: hidden;
   overflow-x: hidden;
 }
 
-.square{
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hologram-container {
   position: relative;
-  width: 400px;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 350px;
+  height: 350px;
+  margin: 40px auto;
+  transform-style: preserve-3d;
 }
 
-.square span:nth-child(1){
+.core {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(#6b72ff00 50%, #000dff3b 40%);
-  box-shadow: 0 0 50px rgb(25, 0, 255), inset 0 0 50px rgb(25, 0, 255);
-  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-  transition: 0.5s;
-  animation: animate1 6s linear infinite;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle at 50% 50%, #2962FF, #0D47A1);
+  border-radius: 50%;
+  box-shadow: 0 0 80px #2962FF, inset 0 0 40px #0D47A1;
+  animation: rotateCore 6s infinite linear;
+  transform: translate(-50%, -50%);
 }
 
-.square span:nth-child(2){
+.ring {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(#6b72ff00 50%, #000dff3b 40%);
-  box-shadow: 0 0 50px rgb(25, 0, 255), inset 0 0 50px rgb(25, 0, 255);
-  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-  transition: 0.5s;
-  animation: animate2 4s linear infinite;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid rgba(41, 98, 255, 0.6);
+  background: radial-gradient(circle, rgba(41, 98, 255, 0.3) 10%, transparent 70%);
+  opacity: 0.8;
+  transform: translate(-50%, -50%);
+  animation: expandRing 4s infinite linear;
 }
 
-.square span:nth-child(3){
+.ring-1 {
+  animation-delay: 0s;
+}
+
+.ring-2 {
+  animation-delay: 1s;
+}
+
+.ring-3 {
+  animation-delay: 2s;
+}
+
+.ring-4 {
+  animation-delay: 3s;
+}
+
+@keyframes expandRing {
+  0% {
+      width: 100px;
+      height: 100px;
+      opacity: 0.8;
+  }
+  50% {
+      opacity: 0.4;
+  }
+  100% {
+      width: 350px;
+      height: 350px;
+      opacity: 0;
+  }
+}
+
+.cursor-trail {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(#6b72ff00 50%, #000dff3b 40%);
-  box-shadow: 0 0 50px rgb(25, 0, 255), inset 0 0 50px rgb(25, 0, 255);
-  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-  transition: 0.5s;
-  animation: animate3 8s linear infinite;
-}
-
-@keyframes animate1 {
-  0%{
-      transform: rotate(0deg);
-  }
-  100%{
-      transform: rotate(360deg);
-  }
-}
-@keyframes animate2 {
-  0%{
-      transform: rotate(0deg);
-  }
-  100%{
-      transform: rotate(360deg);
-  }
-}
-@keyframes animate3 {
-  0%{
-      transform: rotate(0deg);
-  }
-  100%{
-      transform: rotate(360deg);
-  }
+  width: 12px;
+  height: 12px;
+  background: #2962FF;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #2962FF;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: transform 0.2s ease-out, opacity 0.4s ease-out;
 }
 
 

@@ -1,3 +1,4 @@
+import os
 import webbrowser
 import pyautogui
 import pyttsx3
@@ -221,6 +222,12 @@ def allCommands(message=1):
             img = pyautogui.screenshot()
             img.save(f"{name}.png")
             speak("done sir, i am ready for next command ")
+
+        
+        
+
+            
+
 
 
         else:
