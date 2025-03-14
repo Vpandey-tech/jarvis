@@ -273,21 +273,22 @@
             </div>
         </section>
 
-
-        <div id="particles-js"></div>
-
+        
+        
+        <div id="particleCanvas"></div>
         <section id="Oval" class="mb-4">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
-                        <div class="hologram-container">
-                            <div class="core"></div>
+                        <div class="orb-container">
+                            <div class="glowing-orb"></div>
                             <div class="ring ring-1"></div>
                             <div class="ring ring-2"></div>
                             <div class="ring ring-3"></div>
                             <div class="ring ring-4"></div>
                         </div>
+
                     </div>
                     <h5 class="text-light text text-center">Ask me anything</h5>
                     <div class="col-md-12 mt-4 pt-4">
@@ -340,7 +341,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div id="chat-canvas-body" class="offcanvas-body">
-s
+            s
             <!-- Chatting code here -->
             <div id="chat-canvas-body" class="offcanvas-body">
                 <!-- Chat log for displaying messages -->
@@ -363,7 +364,7 @@ s
                 document.addEventListener("DOMContentLoaded", function () {
                     particlesJS("particles-js", {
                         particles: {
-                            number: { value: 250, density: { enable: true, value_area: 800 }},
+                            number: { value: 250, density: { enable: true, value_area: 800 } },
                             color: { value: "#2962FF" },
                             shape: { type: "circle" },
                             opacity: { value: 0.5, random: true },
@@ -377,8 +378,8 @@ s
             </script>
 
 
-              
-            
+
+
             <!--Jquery  -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -407,6 +408,7 @@ s
             <script type="text/javascript" src="controller.js"></script>
             <script type="text/javascript" src="/eel.js"></script>
             
+
 </body>
 
 </html>

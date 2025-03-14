@@ -1,10 +1,10 @@
 body {
   background-color: black;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden;
+  margin: 0;
 }
 
-#particles-js {
+#particleCanvas {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,84 +13,78 @@ body {
   z-index: -1;
 }
 
-.hologram-container {
+.orb-container {
   position: relative;
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
   margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transform-style: preserve-3d;
+  cursor: none;
 }
 
-.core {
+.glowing-orb {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle at 50% 50%, #2962FF, #0D47A1);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at 50% 50%, #00B8FF, #0066FF, #0033FF);
   border-radius: 50%;
-  box-shadow: 0 0 80px #2962FF, inset 0 0 40px #0D47A1;
-  animation: rotateCore 6s infinite linear;
-  transform: translate(-50%, -50%);
+  box-shadow: 0 0 50px #00B8FF, 0 0 100px #0066FF, 0 0 150px #0033FF;
+  animation: pulseOrb 3s infinite ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.orb-container:hover .glowing-orb {
+  transform: scale(1.15);
+  box-shadow: 0 0 100px #00B8FF, 0 0 150px #0066FF, 0 0 200px #0033FF;
 }
 
 .ring {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(0, 184, 255, 0.5);
   border-radius: 50%;
-  border: 4px solid rgba(41, 98, 255, 0.6);
-  background: radial-gradient(circle, rgba(41, 98, 255, 0.3) 10%, transparent 70%);
-  opacity: 0.8;
-  transform: translate(-50%, -50%);
   animation: expandRing 4s infinite linear;
+  opacity: 0;
 }
 
-.ring-1 {
-  animation-delay: 0s;
+.ring-1 { animation-delay: 0s; }
+.ring-2 { animation-delay: 1s; }
+.ring-3 { animation-delay: 2s; }
+.ring-4 { animation-delay: 3s; }
+
+.orb-container:hover .ring {
+  animation-duration: 2s;
+  border-color: rgba(0, 255, 213, 0.8);
 }
 
-.ring-2 {
-  animation-delay: 1s;
-}
-
-.ring-3 {
-  animation-delay: 2s;
-}
-
-.ring-4 {
-  animation-delay: 3s;
+@keyframes pulseOrb {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 @keyframes expandRing {
-  0% {
-      width: 100px;
-      height: 100px;
-      opacity: 0.8;
-  }
-  50% {
-      opacity: 0.4;
-  }
-  100% {
-      width: 350px;
-      height: 350px;
-      opacity: 0;
-  }
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
 }
 
-.cursor-trail {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #2962FF;
+.circle {
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
-  box-shadow: 0 0 15px #2962FF;
-  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
   pointer-events: none;
-  transition: transform 0.2s ease-out, opacity 0.4s ease-out;
+  z-index: 99999999;
+  background-color: black;
 }
+
+
+
 
 
 /* Input Filed Start*/
