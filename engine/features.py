@@ -146,7 +146,7 @@ def findContact(query):
 
 def whatsApp(mobile_no, message, flag, name):
     if flag == 'message':
-        target_tab = 17
+        target_tab = 19
         jarvis_message = "message sent successfully to " + name
     elif flag == 'call':
         target_tab = 12
@@ -265,30 +265,45 @@ def send_email(subject, body, recipient_email):
         return "Email sent successfully!"
     except Exception as e:
         return f"Failed to send email: {str(e)}"
+    
+
+
+
+def get_email_by_name(name: str):
+    """
+    Retrieves an email address from the database based on the name.
+    """
+    con = sqlite3.connect("jarvis.db")
+    cursor = con.cursor()
+
+    cursor.execute("SELECT email FROM emails WHERE name = ?", (name,))
+    result = cursor.fetchone()
+    
+    con.close()
+    return result[0] if result else None  # Return email if found, else None
+
 
 
         
-def extract_email_from_query(query):
+def extract_email_from_query(query: str) -> str:
     """
-    Extracts email addresses or recipient names from the query using regex.
+    Extracts a Gmail address from a query or retrieves stored email based on a name.
     """
-    import re
-
-    # Check if the query contains an email address
-    email_regex = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    # Regex pattern to match Gmail addresses only
+    email_regex = r'[a-zA-Z0-9._%+-]+@gmail\.com'
     email_matches = re.findall(email_regex, query)
 
     if email_matches:
-        return email_matches[0]  # Return the first match
+        return email_matches[0]  # Return the first found Gmail address
+    
+    # Check for stored email in the database
+    words = query.lower().split()
+    for word in words:
+        email = get_email_by_name(word)
+        if email:
+            return email
 
-    # If no email found, check for common names (you can add more names here)
-    if "vivek" in query.lower():
-        return "vp983351@gmail.com"
-    elif "omkar" in query.lower():
-        return "omkarchandra206@gmail.com"
-
-    # Return None if no email is found
-    return None
+    return None 
 
 
 

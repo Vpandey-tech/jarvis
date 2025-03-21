@@ -98,3 +98,48 @@
 # query = "INSERT INTO contacts VALUES (null,'Mama', '9284470741',null)"
 # cursor.execute(query)
 # con.commit()
+
+# import sqlite3
+
+# # Connect to SQLite database
+# con = sqlite3.connect("jarvis.db")
+# cursor = con.cursor()
+
+# # Create the emails table if it doesn't exist
+# cursor.execute('''
+#     CREATE TABLE IF NOT EXISTS emails (
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         name TEXT NOT NULL,
+#         email TEXT NOT NULL UNIQUE
+#     );
+# ''')
+
+# con.commit()
+# con.close()
+
+# print("Emails table created successfully!")
+
+# import sqlite3
+
+
+# def store_email(name: str, email: str):
+#     """
+#     Stores an email address in the database with the corresponding name.
+#     """
+#     con = sqlite3.connect("jarvis.db")
+#     cursor = con.cursor()
+
+#     try:
+#         cursor.execute("INSERT INTO emails (name, email) VALUES (?, ?)", (name, email))
+#         con.commit()
+#         print(f"Email {email} added successfully!")
+#     except sqlite3.IntegrityError:
+#         print(f"Email {email} already exists!")
+#     finally:
+#         con.close()
+
+# # store_email("vivek", "vp983351@gmail.com")
+# # store_email("omkar",  "omkarchandra206@gmail.com")
+# # store_email("sagar", "guptasagar0555@gmail.com")store_email("priti", "pandeyvaibhavi540@gmail.com")
+# # store_email("priti", "pandeyvaibhavi540@gmail.com")
+# store_email("papa" , "pandeysanjay332211@gmail.com")
