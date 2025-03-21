@@ -21,26 +21,48 @@ llm_client = InferenceClient(
 )
 
 def call_llm(inference_client: InferenceClient, prompt: str):
-    # Use the text_generation method to get the model's response
+    # Generate a single, concise response
     response = inference_client.text_generation(
         prompt=prompt,
-        max_new_tokens=250,
-        temperature=0.8
+        max_new_tokens=50,     # Short limit to prevent overgeneration
+        temperature=0.5,       # Strict adherence to input
+        top_p=0.9,             # Focused output
+        top_k=30,              # Tight token selection
+        repetition_penalty=1.2, # Avoid repetition
+        stop=["\n", "User:", "JARVIS:"]  # Updated to use `stop` instead of `stop_sequences`
     )
-    return response
+    return response.strip()
 
-# Continuous chat loop
-print("Welcome to the Chatbot! Type 'exit' to quit.\n")
+# Strict system prompt to enforce single-turn behavior
+system_prompt = (
+    "You are JARVIS, a highly intelligent, witty, and slightly sarcastic personal assistant inspired by Tony Stark's AI. "
+    "Respond ONLY to the user's exact input with a concise, helpful, and truthful answer. "
+    "Add a touch of humor if appropriate, but do NOT generate additional questions, commands, or conversation beyond the input. "
+    "Stop after one response and wait for the next user input."
+)
+
+# Continuous chat loop with debug output
+print("Welcome to JARVIS! Type 'exit' to quit.\n")
 
 while True:
     # Get user prompt
-    user_prompt = input("You: ")
+    user_prompt = input("You: ").strip()
 
     # Check if the user wants to exit
     if user_prompt.lower() == "exit":
-        print("Exiting the chat. Goodbye!")
+        print("JARVIS: Farewell, sir. Shutting down now.")
         break
 
-    # Call the LLM with the user's prompt and display the response
-    response = call_llm(llm_client, user_prompt)
-    print(f"Chatbot: {response}\n")
+    # Debug: Show what we're sending to the model
+    
+
+    # Combine system prompt with user input
+    full_prompt = f"{system_prompt}\n\nUser: {user_prompt}\nJARVIS: "
+
+    # Call the LLM and get the response
+    response = call_llm(llm_client, full_prompt)
+
+    
+
+    # Display the response
+    print(f"JARVIS: {response}\n")
