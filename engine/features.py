@@ -24,6 +24,12 @@ from dotenv import load_dotenv
 from engine.speakk import speak
 import pypdf
 from transformers import pipeline
+from gnews import GNews
+from datetime import datetime
+import re
+from datetime import datetime, timedelta
+
+
 
 # Database connection
 con = sqlite3.connect("jarvis.db")
@@ -44,6 +50,8 @@ if not sender_email or not sender_password:
 
 model_name = "mistralai/Mistral-7B-Instruct-v0.3"
 llm_client = InferenceClient(model=model_name, token=api_token)
+
+
 
 @eel.expose
 def playAssistantSound():
@@ -305,8 +313,45 @@ def extract_email_from_query(query: str) -> str:
 
     return None 
 
+def get_trending_news():
+    """Fetch the latest trending news for India from today."""
+    today = datetime.now().date()
+    google_news = GNews(
+        language='en',
+        country='IN',  # India-specific
+        max_results=5,  # Fetch 5 to ensure at least 3
+        period='1d'     # Restrict to the last 1 day (today)
+    )
+    news = google_news.get_top_news()
+    
+    # Filter news to ensure it's from today
+    filtered_news = []
+    for article in news:
+        pub_date = article.get('published date', '')
+        if pub_date:
+            try:
+                article_date = datetime.strptime(pub_date, '%a, %d %b %Y %H:%M:%S GMT').date()
+                if article_date == today:
+                    filtered_news.append(article)
+            except ValueError:
+                continue
+    
+    # Ensure at least 3 news items (or all available if less than 3)
+    return filtered_news[:max(3, len(filtered_news))]
 
-
-
+def process_trending_news():
+    """Process and return news for console output and speaking headlines."""
+    news = get_trending_news()
+    if not news:
+        return "Sorry, I couldn't find any trending news for today in India.", []
+    
+    console_output = "Here are the trending news headlines from India for today:\n"
+    headlines = []
+    for i, article in enumerate(news, 1):
+        title = article.get('title', 'No title available')
+        publisher = article.get('publisher', {}).get('title', 'Unknown publisher')
+        console_output += f"News {i}: {title}, from {publisher}.\n"
+        headlines.append(title)  # Collect only the headline for speaking
+    return console_output, headlines
 
 

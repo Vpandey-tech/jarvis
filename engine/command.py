@@ -99,6 +99,7 @@ def takecommand():
 
 @eel.expose
 def allCommands(message=1):
+    
 
     if message == 1:
         query = takecommand()
@@ -210,7 +211,7 @@ def allCommands(message=1):
                 error_message = "Recipient email is missing or invalid."
                 eel.DisplayMessage(error_message)
                 return error_message
-
+        
 
 
 
@@ -223,9 +224,24 @@ def allCommands(message=1):
             img.save(f"{name}.png")
             speak("done sir, i am ready for next command ")
 
-        
-        
 
+
+
+        elif "what is the todays news" in query or "whats trending today" in query:
+            from engine.features import process_trending_news
+            speak("Fetching today's trending news for India.")
+            console_text, headlines = process_trending_news()
+            print(console_text)
+            if headlines:
+                speak("Here are today's trending news headlines from India.")
+                for i, headline in enumerate(headlines, 1):
+                    speak(f"News {i}: {headline}")
+            else:
+                speak("Sorry, I couldn't find any trending news for today in India.")
+
+        
+        
+        
             
 
 
